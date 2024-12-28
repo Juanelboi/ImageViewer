@@ -47,7 +47,6 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
         Dimension resized = resizer.resize(new Dimension(bitmap.getWidth(),bitmap.getHeight()));
         int x = (int) ((this.getWidth()-resized.getWidth())/2);
         int y = (int) ((this.getHeight()- resized.getHeight())/2);
-        System.out.println(resized.height +" "+ resized.width);
         g.drawImage(bitmap,x,y,resized.width,resized.height,this);
     }
 
