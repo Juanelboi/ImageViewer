@@ -47,29 +47,30 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
         Dimension resized = resizer.resize(new Dimension(bitmap.getWidth(),bitmap.getHeight()));
         int x = (int) ((this.getWidth()-resized.getWidth())/2);
         int y = (int) ((this.getHeight()- resized.getHeight())/2);
-        g.drawImage(bitmap,x,y, (int) resized.getWidth(), (int) resized.getHeight(),null);
+        System.out.println(resized.height +" "+ resized.width);
+        g.drawImage(bitmap,x,y,resized.width,resized.height,this);
     }
 
     public static class Resizer {
-        private final Dimension basedimension;
+        private final Dimension base;
         private final double aspectRatio;
         public Resizer(Dimension dimension) {
-            this.basedimension = dimension;
+            this.base = dimension;
             aspectRatio = dimension.getWidth()/dimension.getHeight();
         }
 
-        public Dimension resize(Dimension originalDimension) {
+        public Dimension resize(Dimension original) {
 
-            double newWidth = originalDimension.width;
-            double newHeight = originalDimension.height;
+            double newWidth = original.width;
+            double newHeight = original.height;
 
-           if (originalDimension.width>basedimension.width && originalDimension.getHeight()> basedimension.getHeight() ){
-               newWidth = originalDimension.width/aspectRatio;
-               newHeight = originalDimension.width/aspectRatio;
-          }if (originalDimension.getWidth()>basedimension.width){
-               newWidth = originalDimension.width/aspectRatio;
-           }if (originalDimension.getHeight()> basedimension.getHeight()) {
-               newHeight = originalDimension.height/aspectRatio;
+           if (original.width> base.width && original.getHeight()> base.getHeight() ){
+               newWidth = original.width/aspectRatio;
+               newHeight = original.width/aspectRatio;
+          }else if (original.getWidth()> base.width){
+               newWidth = original.width/aspectRatio;
+           }else if (original.getHeight()> base.getHeight()) {
+               newHeight = original.height/aspectRatio;
           }
            return new Dimension((int) newWidth, (int) newHeight);
         }
