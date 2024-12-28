@@ -19,7 +19,7 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        add(createImageDispay());
+        add(createImageDisplay());
         add(createToolbar(),BorderLayout.SOUTH);
     }
 
@@ -38,7 +38,8 @@ public class MainFrame extends JFrame {
 
     public void add(String name, Command command){ commands.put(name,command);}
 
-    private Component createImageDispay() {
+
+    private Component createImageDisplay() {
         SwingImageDisplay display = new SwingImageDisplay();
         this.imageDisplay=display;
         return display;
@@ -47,4 +48,6 @@ public class MainFrame extends JFrame {
     public ImageDisplay imageDisplay(){
         return imageDisplay;
     }
+
+
 }

@@ -26,7 +26,7 @@ public class FileImageLoader implements ImageLoader{
     private Image ImageAt(int i) {
         return new Image() {
             @Override
-            public String name() {
+            public String id() {
                 return files[i].getAbsolutePath();
             }
 

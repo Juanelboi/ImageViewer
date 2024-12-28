@@ -1,7 +1,7 @@
 package software.ulpgc.model;
 
 public interface Image {
-    String name();
+    String id();
     Image next();
     Image prev();
 }
