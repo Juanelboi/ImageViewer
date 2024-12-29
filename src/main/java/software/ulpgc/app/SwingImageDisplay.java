@@ -23,7 +23,7 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
     private Shift shift = Shift.Null;
     private Released released = Released.Null;
     private int initShift;
-    private List<Paint> paints = new ArrayList<>();
+    private final List<Paint> paints = new ArrayList<>();
 
     public SwingImageDisplay(){
         this.addMouseListener(mouseListener());
@@ -160,9 +160,10 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
                newHeight = original.width/aspectRatio;
            }else if (original.getWidth()> base.width){
                newWidth = original.width/aspectRatio;
-           }else if (original.getHeight()> base.getHeight()) {
+           } else if (original.getHeight()> base.getHeight()) {
                newHeight = original.height/aspectRatio;
            }
+           
            return new Dimension((int) newWidth, (int) newHeight);
         }
     }

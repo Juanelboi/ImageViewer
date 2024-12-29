@@ -16,6 +16,5 @@ public class Main {
         mainFrame.add("<", new PreviousImageCommand(presenter));
         mainFrame.add(">",new NextImageCommand(presenter));
         mainFrame.setVisible(true);
-
     }
 }
