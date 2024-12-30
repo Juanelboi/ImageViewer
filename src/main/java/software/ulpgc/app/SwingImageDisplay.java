@@ -29,8 +29,8 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
         this.addMouseListener(mouseListener());
         this.addMouseMotionListener(mouseMotionListener());
         setFocusable(true);
-
     }
+
 
 
 
