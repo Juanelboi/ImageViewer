@@ -31,9 +31,6 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
         setFocusable(true);
     }
 
-
-
-
     private MouseListener mouseListener() {
         return  new MouseListener() {
             @Override

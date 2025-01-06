@@ -5,6 +5,8 @@ import software.ulpgc.view.ImageDisplay;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
@@ -27,14 +29,19 @@ public class MainFrame extends JFrame {
 
     private Component createToolbar() {
         JPanel panel = new JPanel();
-        panel.add(createButton("<"));
-        panel.add(createButton(">"));
+        panel.add(createButton("Previous"));
+        panel.add(createButton("Next"));
         return panel;
     }
 
     private Component createButton(String label) {
         JButton button = new JButton(label);
-        button.addActionListener(e -> commands.get(label).execute());
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commands.get(label).execute();
+            }
+        });
         return button;
     }
 
@@ -48,9 +55,9 @@ public class MainFrame extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode()==KeyEvent.VK_RIGHT){
-                    commands.get(">").execute();
+                    commands.get("Next").execute();
                 }else if (e.getKeyCode()==KeyEvent.VK_LEFT){
-                    commands.get("<").execute();
+                    commands.get("Previous").execute();
                 }
             }
             @Override
