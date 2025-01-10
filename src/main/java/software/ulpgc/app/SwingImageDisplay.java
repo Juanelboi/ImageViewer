@@ -2,6 +2,7 @@ package software.ulpgc.app;
 
 import software.ulpgc.model.Image;
 import software.ulpgc.view.ImageDisplay;
+import software.ulpgc.view.ViewPort;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -123,45 +124,24 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
     HashMap<String, BufferedImage> images = new HashMap<>();
     private void drawImages(Graphics g) {
         for (Paint paint : paints) {
-            checkForSaved(paint);
-            Resizer resizer = new Resizer(new Dimension(this.getWidth(), this.getHeight()));
-            Dimension resized = resizer.resize(new Dimension(bitmap.getWidth(),bitmap.getHeight()));
-            int x = (int) ((this.getWidth()-resized.getWidth())/2);
-            int y = (int) ((this.getHeight()- resized.getHeight())/2);
-            g.drawImage(bitmap,x+ paint.offset,y,resized.width,resized.height,null);
+            checkGallery(paint);
+            bitmap = images.get(paint.id());
+            ViewPort viewPort = ViewPort.ofSize(this.getWidth(), this.getHeight());
+            ViewPort fitted = viewPort.fit(bitmap.getWidth(), bitmap.getHeight());
+            int x =  ((this.getWidth()-fitted.width())/2);
+            int y = ((this.getHeight()- fitted.height())/2);
+            g.drawImage(bitmap,x+ paint.offset,y,fitted.width(),fitted.height(),null);
         }
     }
 
-    private void checkForSaved(Paint paint) {
-        if (images.containsKey(paint.id)){
-            bitmap = images.get(paint.id);
-        }else {
-            images.put(paint.id,load(paint.id));
-            bitmap = load(paint.id);
+    private void checkGallery(Paint paint) {
+        if (images.size()>10){
+            images.clear();
         }
+        if (!images.containsKey(paint.id())){
+            images.put(paint.id(),load(paint.id()));
+        }
+
     }
 
-    public static class Resizer {
-        private final Dimension base;
-        private final double aspectRatio;
-
-        public Resizer(Dimension dimension) {
-            this.base = dimension;
-            aspectRatio = dimension.getWidth()/dimension.getHeight();
-        }
-        public Dimension resize(Dimension original) {
-            double newWidth = original.width;
-            double newHeight = original.height;
-           if (original.width> base.width && original.getHeight()> base.getHeight() ){
-               newWidth = original.width/aspectRatio;
-               newHeight = original.width/aspectRatio;
-           }else if (original.getWidth()> base.width){
-               newWidth = original.width/aspectRatio;
-           } else if (original.getHeight()> base.getHeight()) {
-               newHeight = original.height/aspectRatio;
-           }
-           
-           return new Dimension((int) newWidth, (int) newHeight);
-        }
-    }
 }
