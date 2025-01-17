@@ -15,6 +15,7 @@ import java.util.Map;
 public class MainFrame extends JFrame {
     private final Map<String, Command> commands;
     private ImageDisplay imageDisplay;
+    private ImagePresenter presenter;
 
     public MainFrame() throws HeadlessException {
         commands = new HashMap<>();
@@ -55,9 +56,9 @@ public class MainFrame extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode()==KeyEvent.VK_RIGHT){
-                    commands.get("Next").execute();
+                    presenter.show(presenter.image().next());
                 }else if (e.getKeyCode()==KeyEvent.VK_LEFT){
-                    commands.get("Previous").execute();
+                    presenter.show(presenter.image().prev());
                 }
             }
             @Override
@@ -66,10 +67,16 @@ public class MainFrame extends JFrame {
         };
     }
 
+
+    public ImagePresenter presenter() {
+        return presenter;
+    }
+
     private Component createImageDisplay() {
         SwingImageDisplay display = new SwingImageDisplay();
         display.addKeyListener(createkeyListener());
         this.imageDisplay=display;
+        presenter = new ImagePresenter(imageDisplay);
         return display;
     }
 

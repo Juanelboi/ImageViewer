@@ -11,7 +11,7 @@ public class ImagePresenter {
 
     public ImagePresenter(ImageDisplay imageDisplay) {
         this.display = imageDisplay;
-        this.display.on((Shift) this::shift);
+        this.display.on((Shift) offset -> shift(offset));
         this.display.on((Released) this::released);
     }
 

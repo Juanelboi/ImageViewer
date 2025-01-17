@@ -107,6 +107,7 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
         return image;
     }
 
+
     private BufferedImage load(String name) {
         try {
             return ImageIO.read(new File(name));
@@ -121,6 +122,9 @@ public class SwingImageDisplay extends JPanel implements ImageDisplay {
         g.fillRect(0,0,this.getWidth(),this.getHeight());
         drawImages(g);
     }
+
+
+
     HashMap<String, BufferedImage> images = new HashMap<>();
     private void drawImages(Graphics g) {
         for (Paint paint : paints) {
