@@ -1,4 +1,4 @@
-package software.ulpgc.app;
+package software.ulpgc.control;
 
 import software.ulpgc.model.Image;
 import software.ulpgc.view.ImageDisplay;
@@ -46,5 +46,12 @@ public class ImagePresenter {
     }
     public Image image(){
         return image;
+    }
+
+    public Image next(){
+        return image.next();
+    }
+    public Image prev(){
+        return image.prev();
     }
 }

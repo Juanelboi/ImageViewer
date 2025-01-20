@@ -1,7 +1,5 @@
 package software.ulpgc.control;
 
-import software.ulpgc.app.ImagePresenter;
-
 public class PreviousImageCommand implements Command{
 
     private final ImagePresenter presenter;
@@ -12,6 +10,6 @@ public class PreviousImageCommand implements Command{
 
     @Override
     public void execute() {
-        presenter.show(presenter.image().prev());
+        presenter.show(presenter.prev());
     }
 }

@@ -1,6 +1,8 @@
 package software.ulpgc.app;
 
 import software.ulpgc.control.Command;
+import software.ulpgc.control.ImagePresenter;
+import software.ulpgc.model.Image;
 import software.ulpgc.view.ImageDisplay;
 
 import javax.swing.*;
@@ -56,9 +58,9 @@ public class MainFrame extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode()==KeyEvent.VK_RIGHT){
-                    presenter.show(presenter.image().next());
+                    presenter.show(presenter.next());
                 }else if (e.getKeyCode()==KeyEvent.VK_LEFT){
-                    presenter.show(presenter.image().prev());
+                    presenter.show(presenter.prev());
                 }
             }
             @Override
@@ -67,6 +69,10 @@ public class MainFrame extends JFrame {
         };
     }
 
+
+    public void show(Image image){
+        presenter.show(image);
+    }
 
     public ImagePresenter presenter() {
         return presenter;

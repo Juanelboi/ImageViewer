@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 public class Main {
     public static void main(String[] args) {
         MainFrame mainFrame = new MainFrame();
-        mainFrame.presenter().show(image());
+        mainFrame.show(image());
         mainFrame.add("Previous", new PreviousImageCommand(mainFrame.presenter()));
         mainFrame.add("Next",new NextImageCommand(mainFrame.presenter()));
         mainFrame.setVisible(true);
